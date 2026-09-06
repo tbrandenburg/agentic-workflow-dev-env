@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-IMAGE ?= ghcr.io/OWNER/agentic-workflow-dev-env:latest
+IMAGE ?= ghcr.io/tbrandenburg/agentic-workflow-dev-env:latest
 COMPOSE ?= docker compose
 CACERT ?=
 comma := ,

@@ -2,7 +2,7 @@ name: agentic-workflow-dev-env
 
 services:
   workflow:
-    image: ${IMAGE:-ghcr.io/OWNER/agentic-workflow-dev-env:latest}
+    image: ${IMAGE:-ghcr.io/tbrandenburg/agentic-workflow-dev-env:latest}
     build:
       context: .
     ports:
