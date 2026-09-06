@@ -38,9 +38,7 @@ RUN --mount=type=secret,id=cacert \
       @earendil-works/pi-coding-agent@${PI_VERSION} --ignore-scripts \
     && npm install --global --omit=dev \
       @openai/codex@${CODEX_VERSION} \
-      && curl -fsSL "${OPENCODE_INSTALL_URL}" | bash \
-    && mv /root/.opencode /home/node/.opencode \
-    && chown -R node:node /home/node/.opencode \
+    && su -s /bin/bash node -c "export HOME=/home/node; curl -fsSL '${OPENCODE_INSTALL_URL}' | bash" \
     && rm -f /usr/local/share/ca-certificates/custom-ca.crt \
     && update-ca-certificates \
     && rm -rf /var/lib/apt/lists/*

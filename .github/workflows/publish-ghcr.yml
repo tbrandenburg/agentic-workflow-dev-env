@@ -37,6 +37,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
           IMAGE: ghcr.io/${{ github.repository_owner }}/agentic-workflow-dev-env:${{ steps.meta.outputs.version }}
+          IMAGE_URL: https://github.com/users/${{ github.repository_owner }}/packages/container/agentic-workflow-dev-env?tag=${{ steps.meta.outputs.version }}
         run: |
           body="$(gh release view "$RELEASE_TAG" --json body --jq .body)"
           case "$body" in
@@ -44,4 +45,4 @@ jobs:
           esac
           gh release edit "$RELEASE_TAG" --notes "$body
 
-          Container image: $IMAGE"
+          Container image: [$IMAGE]($IMAGE_URL)"
