@@ -34,6 +34,10 @@ Inject provider credentials through your secret manager or environment at runtim
 
 `GH_TOKEN` is optional and is used to configure Git credential handling at startup, enabling non-interactive access to private repositories. Use a least-privilege fine-grained token.
 
+## npm global prefix
+
+This image sets `NPM_CONFIG_PREFIX` to `/home/node/.npm-global`, a rootless-friendly location owned by the non-root `node` user, so global npm installs don't require root. This path is an internal implementation detail and may change between image tags. If you build a derived image `FROM` this one and need the global install path, query it dynamically with `npm config get prefix` instead of hardcoding it.
+
 ## SRT profile
 
 Normal Node-RED workflows use:

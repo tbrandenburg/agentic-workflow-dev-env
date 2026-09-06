@@ -78,6 +78,15 @@ COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint
 RUN mkdir -p "${NODE_RED_HOME}" "${WORKSPACE}" \
     && chown -R node:node "${NODE_RED_HOME}" "${WORKSPACE}" "${NPM_CONFIG_PREFIX}"
 
+# Wire the pre-installed @tbrandenburg/node-red-agents package into Node-RED's
+# default userDir so it is auto-discovered without a separate install step.
+# Node-RED only scans <userDir>/node_modules for nodes; a global npm install
+# alone is invisible to its palette loader.
+RUN mkdir -p "${NODE_RED_HOME}/node_modules/@tbrandenburg" \
+    && ln -s "${NPM_CONFIG_PREFIX}/lib/node_modules/@tbrandenburg/node-red-agents" \
+      "${NODE_RED_HOME}/node_modules/@tbrandenburg/node-red-agents" \
+    && chown -R node:node "${NODE_RED_HOME}"
+
 USER node
 WORKDIR /workspace
 
