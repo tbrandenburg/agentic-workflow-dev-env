@@ -8,7 +8,7 @@ Included: Node 22, Node-RED, OpenCode CLI, Git/GitHub CLI, and Anthropic's sandb
 
 ```sh
 cp .env.example .env
-mkdir -p workspace opencode
+mkdir -p workspace
 docker compose up --build
 ```
 
@@ -26,9 +26,9 @@ make build CACERT=/path/to/corporate-ca.pem
 
 The same image tag is used by `make up`; `make up-srt` starts the opt-in nested-sandbox override.
 
-## OpenCode and secrets
+## Secrets
 
-Place non-secret OpenCode settings in `./opencode`; it is mounted read-only at `~/.config/opencode`. Inject provider credentials through your secret manager or environment at runtime. Never bake credentials or host home directories into the image.
+Inject provider credentials through your secret manager or environment at runtime. Never bake credentials or host home directories into the image.
 
 `GH_TOKEN` is optional and is used to configure Git credential handling at startup, enabling non-interactive access to private repositories. Use a least-privilege fine-grained token.
 

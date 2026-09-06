@@ -2,8 +2,7 @@
 set -Eeuo pipefail
 
 mkdir -p /data /workspace \
-  "$HOME/.config" "$HOME/.cache" "$HOME/.local/state" \
-  "$HOME/.local/share/opencode" "$HOME/.opencode"
+  "$HOME/.cache" "$HOME/.local/state"
 
 # GH_TOKEN lets private-repository operations work without persisting a token.
 if [[ -n "${GH_TOKEN:-}" ]]; then

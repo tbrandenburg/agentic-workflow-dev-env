@@ -10,15 +10,11 @@ services:
     environment:
       TZ: ${TZ:-UTC}
       GH_TOKEN: ${GH_TOKEN:-}
-      # OpenCode can read provider settings from its normal per-user paths.
-      # Supply only the keys/providers you actually use.
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
     volumes:
       - node_red_data:/data
       - ./workspace:/workspace
-      # Keep optional OpenCode configuration and credentials outside the image.
-      - ./opencode:/home/node/.config/opencode:ro
     restart: unless-stopped
 
 volumes:
