@@ -28,7 +28,9 @@ jobs:
           images: ghcr.io/${{ github.repository_owner }}/agentic-workflow-dev-env
           tags: |
             type=ref,event=branch
-            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
             type=raw,value=latest,enable={{is_default_branch}}
       - uses: docker/build-push-action@v6
         with:
