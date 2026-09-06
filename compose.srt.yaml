@@ -1,0 +1,8 @@
+# Opt-in development override for workflows using @anthropic-ai/sandbox-runtime.
+# Use: docker compose -f compose.yaml -f compose.srt.yaml up
+services:
+  workflow:
+    cap_add: [SYS_ADMIN, NET_ADMIN]
+    security_opt:
+      - seccomp=unconfined
+      - apparmor=unconfined

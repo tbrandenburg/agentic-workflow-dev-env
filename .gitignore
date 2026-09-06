@@ -1,0 +1,5 @@
+.env
+workspace/
+opencode/
+node_modules/
+npm-debug.log*
