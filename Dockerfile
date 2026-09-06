@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-ARG NODE_VERSION=22
+ARG NODE_VERSION=24
 FROM node:${NODE_VERSION}-bookworm-slim
 
 LABEL org.opencontainers.image.title="agentic-workflow-dev-env" \
@@ -16,7 +16,13 @@ ENV DEBIAN_FRONTEND=noninteractive \
     NODE_RED_HOME=/data \
     WORKSPACE=/workspace \
     NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt \
-    PATH=/home/node/.opencode/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    NPM_CONFIG_PREFIX=/home/node/.npm-global \
+    PATH=/home/node/.npm-global/bin:/home/node/.opencode/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Global npm prefix owned by the non-root `node` user so downstream images
+# (FROM this-image + RUN npm install -g <pkg>) work without root.
+RUN mkdir -p "${NPM_CONFIG_PREFIX}" \
+    && chown -R node:node "${NPM_CONFIG_PREFIX}"
 
 # Tools required for workflow development and @anthropic-ai/sandbox-runtime.
 # Do not add Docker-in-Docker: mount the host socket only in a local override,
@@ -70,7 +76,7 @@ RUN --mount=type=secret,id=cacert \
 COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint
 
 RUN mkdir -p "${NODE_RED_HOME}" "${WORKSPACE}" \
-    && chown -R node:node "${NODE_RED_HOME}" "${WORKSPACE}"
+    && chown -R node:node "${NODE_RED_HOME}" "${WORKSPACE}" "${NPM_CONFIG_PREFIX}"
 
 USER node
 WORKDIR /workspace

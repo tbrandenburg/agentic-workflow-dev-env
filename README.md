@@ -2,7 +2,7 @@
 
 A general-purpose, publishable environment for building Node-RED agent workflows. It keeps workflow state in `/data`, projects in `/workspace`, and credentials outside the image.
 
-Included: Node 22, Node-RED with node-red-agents, Pi, Claude Code, Codex, OpenCode CLI, Git/GitHub CLI, and Anthropic's sandbox runtime (`srt`) plus its required `bubblewrap`, `ripgrep`, and `socat` dependencies.
+Included: Node 24, Node-RED with node-red-agents, Pi, Claude Code, Codex, OpenCode CLI, Git/GitHub CLI, and Anthropic's sandbox runtime (`srt`) plus its required `bubblewrap`, `ripgrep`, and `socat` dependencies.
 
 ## Run
 
@@ -58,4 +58,4 @@ The semantic version is stored in `VERSION`. Run `make release BUMP=patch`, `mak
 
 ## Origin of the design
 
-This is distilled from [tbrandenburg/pixel-agents-adt](https://github.com/tbrandenburg/pixel-agents-adt): its successful elements are the Node 22 base, OpenCode + `gh` + SRT runtime, SRT's `bubblewrap`/`ripgrep`/`socat` dependencies, pre-created tool state directories, and startup Git credential setup. Pixel Agents, the bundled Agentic Development Team demo flow, shared `~/.pixel-agents` discovery, and build-time patches to one demo's flows are intentionally excluded.
+This is distilled from [tbrandenburg/pixel-agents-adt](https://github.com/tbrandenburg/pixel-agents-adt): its successful elements are the Node 24 base, OpenCode + `gh` + SRT runtime, SRT's `bubblewrap`/`ripgrep`/`socat` dependencies, pre-created tool state directories, and startup Git credential setup. Pixel Agents, the bundled Agentic Development Team demo flow, shared `~/.pixel-agents` discovery, and build-time patches to one demo's flows are intentionally excluded.
