@@ -2,7 +2,7 @@
 
 A general-purpose, publishable environment for building Node-RED agent workflows. It keeps workflow state in `/data`, projects in `/workspace`, and credentials outside the image.
 
-Included: Node 22, Node-RED with node-red-agents, Pi, Claude Code, OpenCode CLI, Git/GitHub CLI, and Anthropic's sandbox runtime (`srt`) plus its required `bubblewrap`, `ripgrep`, and `socat` dependencies.
+Included: Node 22, Node-RED with node-red-agents, Pi, Claude Code, Codex, OpenCode CLI, Git/GitHub CLI, and Anthropic's sandbox runtime (`srt`) plus its required `bubblewrap`, `ripgrep`, and `socat` dependencies.
 
 ## Run
 
@@ -54,7 +54,7 @@ That override adds `SYS_ADMIN`, `NET_ADMIN`, and unconfined seccomp/AppArmor so 
 
 Push this directory to a GitHub repository named `agentic-workflow-dev-env`. The included workflow publishes `ghcr.io/<repository-owner>/agentic-workflow-dev-env` on pushes to `main` and version tags. Make the resulting package public in GitHub Packages if you want pull access without authentication.
 
-The semantic version is stored in `VERSION`. Run `make release BUMP=patch`, `make release BUMP=minor`, or `make release BUMP=major` from a clean worktree. The target creates and pushes a `vMAJOR.MINOR.PATCH` tag; the tag workflow publishes matching semver image tags.
+The semantic version is stored in `VERSION`. Run `make release BUMP=patch`, `make release BUMP=minor`, or `make release BUMP=major` from a clean worktree. The target creates and pushes a `vMAJOR.MINOR.PATCH` tag and GitHub Release; the release workflow publishes matching semver image tags.
 
 ## Origin of the design
 

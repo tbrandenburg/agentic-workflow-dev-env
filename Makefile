@@ -60,4 +60,5 @@ release: ## Bump VERSION, commit, tag, and push; use BUMP=major|minor|patch
 	git commit -m "release: v$$next"; \
 	git tag -a "v$$next" -m "Release v$$next"; \
 	git push origin HEAD; \
-	git push origin "v$$next"
+	git push origin "v$$next"; \
+	gh release create "v$$next" --title "v$$next" --generate-notes --verify-tag

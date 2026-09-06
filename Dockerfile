@@ -6,8 +6,9 @@ LABEL org.opencontainers.image.title="agentic-workflow-dev-env" \
       org.opencontainers.image.description="Node-RED and CLI tooling for agentic workflow development" \
       org.opencontainers.image.licenses="MIT"
 
-ARG NODE_RED_VERSION=4.0.9
-ARG PI_VERSION=0.85.1
+ARG NODE_RED_VERSION=latest
+ARG PI_VERSION=latest
+ARG CODEX_VERSION=latest
 ARG OPENCODE_INSTALL_URL=https://opencode.ai/install
 ARG SRT_VERSION=latest
 
@@ -32,8 +33,11 @@ RUN --mount=type=secret,id=cacert \
     && npm install --global --omit=dev \
       node-red@${NODE_RED_VERSION} \
       @anthropic-ai/sandbox-runtime@${SRT_VERSION} \
-      @tbrandenburg/node-red-agents@0.4.1 \
+      @tbrandenburg/node-red-agents@latest \
+    && npm install --global --omit=dev \
       @earendil-works/pi-coding-agent@${PI_VERSION} --ignore-scripts \
+    && npm install --global --omit=dev \
+      @openai/codex@${CODEX_VERSION} \
       && curl -fsSL "${OPENCODE_INSTALL_URL}" | bash \
     && mv /root/.opencode /home/node/.opencode \
     && chown -R node:node /home/node/.opencode \
@@ -56,7 +60,7 @@ RUN --mount=type=secret,id=cacert \
     && install -d -m 0755 /etc/apt/keyrings \
     && curl -fsSL https://downloads.claude.ai/keys/claude-code.asc \
       -o /etc/apt/keyrings/claude-code.asc \
-    && echo "deb [signed-by=/etc/apt/keyrings/claude-code.asc] https://downloads.claude.ai/claude-code/apt/stable stable main" \
+    && echo "deb [signed-by=/etc/apt/keyrings/claude-code.asc] https://downloads.claude.ai/claude-code/apt/latest latest main" \
       > /etc/apt/sources.list.d/claude-code.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends gh claude-code \
